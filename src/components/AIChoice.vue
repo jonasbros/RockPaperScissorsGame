@@ -24,8 +24,10 @@ export default {
     data: () => ({      
         number: 0,
         rollInterval: null,
+        hands: null,
     }),
     mounted() {
+        this.hands = document.querySelectorAll('.ai-choice');
         this.roll();
 
         setTimeout( () => {
@@ -38,11 +40,10 @@ export default {
     },
     methods: {
         roll() {
-            let hands = document.querySelectorAll('.ai-choice');
             this.rollInterval = setInterval(() => {
-                hands[this.number].classList.toggle('active');
+                this.hands[this.number].classList.remove('active');
                 this.number = Math.floor(Math.random() * 3);
-                hands[this.number].classList.toggle('active');
+                this.hands[this.number].classList.add('active');
             }, 250);
         },
         results() {
